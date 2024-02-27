@@ -13,7 +13,7 @@ export default function AuthButtonClient({
   session: Session | null;
 }) {
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient<Database>();
 
   // const [session, setSession] = useState();
 
