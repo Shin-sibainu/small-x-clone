@@ -1,27 +1,39 @@
+"use client";
+
 import { User, createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import SubmitButton from "./SubmitButton";
+import { addPost } from "./actions/addPostAction";
+import { useRef } from "react";
 
 export default function NewPost({ user }: { user: User }) {
-  const addPost = async (formData: FormData) => {
-    "use server";
-    const title = String(formData.get("title"));
-    if (title.length === 0) {
-      return;
-    }
-    const supabase = createServerActionClient<Database>({ cookies });
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    await supabase.from("Posts").insert({ title, user_id: user?.id });
+  const formRef = useRef<HTMLFormElement>(null);
 
-    revalidatePath("/");
-  };
+  // const addPost = async (formData: FormData) => {
+  //   "use server";
+  //   const title = String(formData.get("title"));
+  //   if (title.length === 0) {
+  //     return;
+  //   }
+  //   const supabase = createServerActionClient<Database>({ cookies });
+  //   const {
+  //     data: { user },
+  //   } = await supabase.auth.getUser();
+  //   await supabase.from("Posts").insert({ title, user_id: user?.id });
+
+  //   revalidatePath("/");
+  // };
 
   return (
-    <form className="border border-gray-800 border-t-0" action={addPost}>
+    <form
+      ref={formRef}
+      className="border border-gray-800 border-t-0"
+      action={async (formData) => {
+        await addPost(formData);
+        formRef.current?.reset();
+      }}
+    >
       <div className="flex py-8 px-4 items-center">
         <div className="h-12 w-12">
           <Image
