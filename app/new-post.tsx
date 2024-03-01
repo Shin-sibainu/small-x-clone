@@ -16,8 +16,11 @@ export default function NewPost() {
   };
 
   return (
-    <form action={addPost}>
-      <input name="title" className="bg-blue-50" />
+    <form className="border border-gray-800 border-t-0" action={addPost}>
+      <div className="flex py-8 px-4">
+        <div className="bg-orange-400">Image</div>
+        <input name="title" className="bg-blue-400 flex-1" />
+      </div>
     </form>
   );
 }

@@ -33,8 +33,11 @@ export default async function Home() {
     })) ?? [];
 
   return (
-    <>
-      <AuthButtonServer />
+    <div className="mx-auto max-w-xl text-white">
+      <div className="flex justify-between px-4 py-6 border-slate-800 border border-t-0">
+        <h1 className="text-xl font-bold">Home</h1>
+        <AuthButtonServer />
+      </div>
       <NewPost />
       {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
       {/* {posts?.map((post) => (
@@ -47,6 +50,6 @@ export default async function Home() {
         </div>
       ))} */}
       <Posts posts={posts} />
-    </>
+    </div>
   );
 }

@@ -43,9 +43,13 @@ export default function AuthButtonClient({
   return (
     <>
       {session ? (
-        <button onClick={handleSignOut}>ログアウト</button>
+        <button className="text-xs text-gray-400" onClick={handleSignOut}>
+          ログアウト
+        </button>
       ) : (
-        <button onClick={handleSignIn}>サインイン</button>
+        <button className="text-xs text-gray-400" onClick={handleSignIn}>
+          サインイン
+        </button>
       )}
     </>
   );
