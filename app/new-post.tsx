@@ -6,8 +6,11 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import { addPost } from "./actions/addPostAction";
 import { useRef } from "react";
+import { useFormStatus } from "react-dom";
 
 export default function NewPost({ user }: { user: User }) {
+  const { pending } = useFormStatus();
+  console.log(pending);
   const formRef = useRef<HTMLFormElement>(null);
 
   // const addPost = async (formData: FormData) => {
@@ -34,6 +37,7 @@ export default function NewPost({ user }: { user: User }) {
         formRef.current?.reset();
       }}
     >
+      <h1 className="text-white text-3xl">{String(pending)}</h1>
       <div className="flex py-8 px-4 items-center">
         <div className="h-12 w-12">
           <Image
@@ -52,8 +56,9 @@ export default function NewPost({ user }: { user: User }) {
         <button
           type="submit"
           className="bg-slate-600 px-6 py-3 rounded-md ml-2"
+          disabled={pending}
         >
-          送信
+          {pending ? "post..." : "送信"}
         </button>
       </div>
     </form>
