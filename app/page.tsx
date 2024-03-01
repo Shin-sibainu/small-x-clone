@@ -20,7 +20,8 @@ export default async function Home() {
 
   const { data } = await supabase
     .from("Posts")
-    .select("*, author:profiles(*), likes(user_id)");
+    .select("*, author:profiles(*), likes(user_id)")
+    .order("created_at", { ascending: false });
 
   const posts =
     data?.map((post) => ({
@@ -38,7 +39,7 @@ export default async function Home() {
         <h1 className="text-xl font-bold">Home</h1>
         <AuthButtonServer />
       </div>
-      <NewPost />
+      <NewPost user={session.user} />
       {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
       {/* {posts?.map((post) => (
         <div key={post.id}>
