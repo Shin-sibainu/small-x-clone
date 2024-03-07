@@ -37,7 +37,7 @@ export default function NewPost({ user }: { user: User }) {
         formRef.current?.reset();
       }}
     >
-      <h1 className="text-white text-3xl">{String(pending)}</h1>
+      {/* <h1 className="text-white text-3xl">{String(pending)}</h1> */}
       <div className="flex py-8 px-4 items-center">
         <div className="h-12 w-12">
           <Image
